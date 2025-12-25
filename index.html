@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>С днём рождения, Вова! 💜</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #270672, #462B83, #4212AF);
+      color: #f0f0ff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      padding: 16px;
+      position: relative;
+    }
+
+    .decoration {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0.65;
+      animation: twinkle 4s infinite ease-in-out;
+      z-index: 1;
+      color: #8D6DD7;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.25); }
+    }
+
+    .container {
+      max-width: 90%;
+      width: 500px;
+      padding: 36px 24px;
+      background: rgba(15, 5, 35, 0.85);
+      border-radius: 24px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(114, 71, 215, 0.4);
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      border: 2px solid #7247D7;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.7rem;
+      font-weight: 800;
+      margin-bottom: 22px;
+      color: #f0f0ff;
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 20px #8D6DD7,
+        0 0 30px #7247D7;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 16px 0;
+      color: #e0e0ff;
+    }
+
+    /* === ИСПРАВЛЕННЫЙ ТОРТ === */
+    .cake {
+      margin: 28px auto;
+      width: 180px;
+      height: 200px;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 2s 0.5s forwards;
+    }
+
+    .cake-layer, .frosting {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50% / 10%;
+    }
+
+    .cake-layer {
+      background: linear-gradient(to bottom, #f0e6ff, #d9c9ff);
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .layer-1 { width: 180px; height: 50px; bottom: 0; }
+    .layer-2 { width: 150px; height: 46px; bottom: 50px; }
+    .layer-3 { width: 120px; height: 42px; bottom: 96px; }
+
+    .frosting {
+      background: #8D6DD7;
+      z-index: 2;
+    }
+
+    .frost-1 { width: 180px; height: 8px; bottom: 50px; }
+    .frost-2 { width: 150px; height: 8px; bottom: 96px; }
+    .frost-3 { width: 120px; height: 8px; bottom: 138px; }
+
+    .sprinkles {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #7247D7;
+    }
+
+    .candle {
+      position: absolute;
+      bottom: 146px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 36px;
+      background: #3a3a3a;
+      z-index: 5;
+    }
+
+    .flame {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 22px;
+      background: radial-gradient(circle, #ffcc66, #ff6600);
+      border-radius: 50% 50% 20% 20%;
+      animation: flickerFlame 0.7s infinite alternate;
+      box-shadow: 0 0 12px #ff9900;
+    }
+
+    @keyframes flickerFlame {
+      0% { opacity: 0.85; transform: translateX(-50%) scale(1); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1.15) rotate(3deg); }
+    }
+
+    /* === КНОПКА — СОВМЕСТИМОСТЬ С TELEGRAM iOS === */
+    .gift-btn {
+      margin: 30px auto;
+      padding: 16px 40px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #7247D7, #8D6DD7);
+      border: none;
+      border-radius: 60px;
+      color: white;
+      cursor: pointer; /* КРИТИЧНО для iOS */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation; /* Ускоряет реакцию на тач */
+      box-shadow: 0 8px 22px rgba(114, 71, 215, 0.5);
+      transition: all 0.25s ease;
+      opacity: 0;
+      animation: fadeIn 2.5s forwards;
+      font-family: 'Poppins', sans-serif;
+      user-select: none;
+    }
+
+    .gift-btn:hover,
+    .gift-btn:active {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 26px rgba(141, 109, 215, 0.7);
+    }
+
+    #unbox-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 3, 25, 0.94);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+
+    #unbox-container.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .unbox-screen {
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      padding: 36px 20px;
+      background: linear-gradient(145deg, #270672, #462B83);
+      border-radius: 22px;
+      box-shadow: 0 0 35px rgba(133, 109, 215, 0.6);
+      color: white;
+      position: relative;
+      border: 2px solid #8D6DD7;
+    }
+
+    .unbox-item {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin: 20px auto;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.4s ease;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px;
+    }
+
+    .unbox-item.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .unbox-label {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #f0f0ff;
+      margin-top: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .unbox-rarity {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ffd700;
+      margin-top: 8px;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    }
+
+    .close-btn {
+      margin-top: 24px;
+      padding: 12px 28px;
+      background: #8D6DD7;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1.05rem;
+      transition: background 0.25s;
+      font-family: 'Inter', sans-serif;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .close-btn:hover {
+      background: #7247D7;
+    }
+
+    .signature {
+      margin-top: 26px;
+      font-style: italic;
+      font-weight: 600;
+      color: #d0c0ff;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Скрытое хранилище */
+    #image-cache {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Украшения -->
+  <div class="decoration" style="top:10%; left:8%; animation-delay:0s;">💜</div>
+  <div class="decoration" style="top:15%; right:10%; animation-delay:0.8s;">✨</div>
+  <div class="decoration" style="bottom:18%; left:10%; animation-delay:1.4s;">🎁</div>
+  <div class="decoration" style="bottom:10%; right:12%; animation-delay:2.0s;">🎉</div>
+  <div class="decoration" style="top:35%; left:20%; animation-delay:1.2s;">🎂</div>
+  <div class="decoration" style="top:50%; right:18%; animation-delay:2.4s;">🎊</div>
+
+  <div class="container">
+    <h1>С днём рождения, Вова!</h1>
+    <p>Пусть этот год принесёт тебе столько же радости, сколько ты даришь другим!</p>
+    <p>P.S. Ну ты и кабан уже взрослый!</p>
+
+    <!-- Исправленный торт -->
+    <div class="cake">
+      <div class="cake-layer layer-1"></div>
+      <div class="cake-layer layer-2"></div>
+      <div class="cake-layer layer-3"></div>
+      <div class="frosting frost-1"></div>
+      <div class="frosting frost-2"></div>
+      <div class="frosting frost-3"></div>
+      <div class="sprinkles" style="background:#7247D7; bottom:52px; left:50px;"></div>
+      <div class="sprinkles" style="background:#8D6DD7; bottom:54px; left:90px;"></div>
+      <div class="sprinkles" style="background:#ffd700; bottom:53px; left:150px;"></div>
+      <div class="sprinkles" style="background:#7247D7; bottom:98px; left:60px;"></div>
+      <div class="sprinkles" style="background:#ffd700; bottom:99px; left:120px;"></div>
+      <div class="sprinkles" style="background:#8D6DD7; bottom:140px; left:70px;"></div>
+      <div class="candle">
+        <div class="flame"></div>
+      </div>
+    </div>
+
+    <!-- Кнопка с улучшенной поддержкой iOS -->
+    <button class="gift-btn" id="open-gift" ontouchstart="void(0)">
+      <i class="fas fa-gift"></i> Открыть подарок!
+    </button>
+
+    <div class="signature">С любовью, твой брат ❤️</div>
+  </div>
+
+  <!-- Unbox -->
+  <div id="unbox-container">
+    <div class="unbox-screen">
+      <img id="unbox-item" class="unbox-item" src="" alt="Скин" />
+      <div class="unbox-label" id="unbox-label">Распаковка...</div>
+      <div class="unbox-rarity" id="rarity"></div>
+      <button class="close-btn" id="close-unbox" ontouchstart="void(0)">Закрыть</button>
+    </div>
+  </div>
+
+  <div id="image-cache"></div>
+
+  <script>
+    // === ПРЕДЗАГРУЗКА ИЗОБРАЖЕНИЙ ===
+    const imageUrls = [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJ1qN9uwnz6OR833yB2RdG1gGEbsVb_F0hg&s", // AK-47 Vulcan
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0fJdqBqlwu_3d7t0i9_SXVvJBVhax5QxDlQ&s", // AWP Dragon Lore
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW6KMxt_rxAGC_0VZ95mbtD5uUZtLdIu9VYw&s", // M4A4 Howl
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2xiuIgDFbqj-8D5lWNWa6VmAGXdRTtgFoQw&s", // DEagle Blaze
+      "https://static.wikia.nocookie.net/0713cf5b-a4dc-4726-9ed2-689416d61d5b/scale-to-width/755"  // Roblox Avatar (замени при желании)
+    ];
+
+    const cacheContainer = document.getElementById('image-cache');
+    imageUrls.forEach(url => {
+      const img = new Image();
+      img.src = url;
+      cacheContainer.appendChild(img);
+    });
+
+    // === КОНФЕТТИ ===
+    function createConfetti() {
+      const colors = ['#8D6DD7', '#7247D7', '#ffd700', '#f0e6ff', '#4212AF'];
+      const container = document.body;
+      const confettiCount = 100;
+
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.width = Math.random() * 8 + 4 + 'px';
+        confetti.style.height = confetti.style.width;
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        confetti.style.position = 'absolute';
+        confetti.style.opacity = '0';
+        container.appendChild(confetti);
+
+        const anim = confetti.animate([
+          { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+          { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+        ], {
+          duration: Math.random() * 2500 + 1500,
+          easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+        });
+
+        anim.onfinish = () => confetti.remove();
+      }
+    }
+
+    // === ОСНОВНАЯ ЛОГИКА ===
+    function initUnbox() {
+      const items = [
+        { image: imageUrls[0], name: "AK-47 | Vulcan", rarity: "Covert" },
+        { image: imageUrls[1], name: "AWP | Dragon Lore", rarity: "Covert" },
+        { image: imageUrls[2], name: "M4A4 | Howl", rarity: "Contraband" },
+        { image: imageUrls[3], name: "Desert Eagle | Blaze", rarity: "Covert" },
+        { image: imageUrls[4], name: "Roblox Avatar Skin", rarity: "LEGENDARY" }
+      ];
+
+      document.getElementById('open-gift').addEventListener('click', () => {
+        createConfetti();
+
+        const unbox = document.getElementById('unbox-container');
+        const itemEl = document.getElementById('unbox-item');
+        const labelEl = document.getElementById('unbox-label');
+        const rarityEl = document.getElementById('rarity');
+
+        unbox.classList.add('active');
+
+        let currentIndex = 0;
+        let speed = 100;
+        let revealed = false;
+
+        const roll = setInterval(() => {
+          const current = items[currentIndex % items.length];
+          itemEl.src = current.image;
+          itemEl.alt = current.name;
+          labelEl.textContent = current.name;
+          rarityEl.textContent = current.rarity;
+          rarityEl.style.color = current.rarity === "LEGENDARY" ? "#ffd700" : "#c5a9ff";
+
+          itemEl.classList.remove('show');
+          void itemEl.offsetWidth;
+          itemEl.classList.add('show');
+
+          currentIndex++;
+          speed += 10;
+
+          if (speed > 400 && !revealed) {
+            const roblox = items[4];
+            itemEl.src = roblox.image;
+            itemEl.alt = roblox.name;
+            labelEl.textContent = roblox.name;
+            rarityEl.textContent = roblox.rarity;
+            rarityEl.style.color = "#ffd700";
+            itemEl.classList.remove('show');
+            void itemEl.offsetWidth;
+            itemEl.classList.add('show');
+
+            clearInterval(roll);
+            revealed = true;
+            setTimeout(createConfetti, 600);
+          }
+        }, speed);
+
+        document.getElementById('close-unbox').onclick = () => {
+          unbox.classList.remove('active');
+        };
+      });
+    }
+
+    // === НАДЕЖНАЯ ИНИЦИАЛИЗАЦИЯ (работает в Telegram iOS) ===
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUnbox);
+    } else {
+      initUnbox();
+    }
+
+    // Запуск конфетти при загрузке
+    window.addEventListener('load', () => {
+      setTimeout(createConfetti, 1000);
+    });
+  </script>
+
+</body>
+</html>
